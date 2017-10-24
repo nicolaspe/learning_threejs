@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Camera Playground!</title>
+		<link rel="stylesheet" href="camera_style.css">
+
+		<script src="../lib/three.js"></script>
+		<script src="../lib/OrbitControls.js"></script>
+
+	</head>
+	<body>
+		<h1>Camera playground!</h1>
+		<div class="container">
+			<div id="sketch"></div>
+
+			<div id="controls">
+				<ul>
+					<li>FOV: <span id="label_fov"> </span></li>
+					<li>Position: ( <span id="label_px"> </span> , <span id="label_py"> </span> , <span id="label_pz"> </span> ) </li>
+					<li>Rotation: ( <span id="label_rx"> </span> , <span id="label_ry"> </span> , <span id="label_rz"> </span> ) </li>
+				</ul>
+			</div>
+		</div>
+
+		<script src="cameraPlane.js"></script>
+	</body>
+</html>

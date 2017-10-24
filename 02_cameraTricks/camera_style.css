@@ -1,0 +1,44 @@
+html {
+	background: #e0d5dd;
+	/*padding: 15px;*/
+}
+
+body {
+	color: #26073b;
+	font-family: "Helvetica", "Tahoma", "Arial", "sans";
+	font-weight: lighter;
+	margin: 5px;
+}
+
+h1 {
+	text-align: center;
+}
+h1, h2, h3 {
+	color: #26073b;
+}
+
+a {
+	color: #26073b;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: bold;
+}
+
+.container {
+	background: black;
+	color: #e0d5dd;
+}
+#sketch {
+	position: static;
+	background: black;
+}
+#controls {
+	padding: 1px 30px 1px 30px;
+}
+#controls ul {
+	list-style: none;
+}
+#controls li {
+	padding: 2px 0px 2px 0px;
+}
