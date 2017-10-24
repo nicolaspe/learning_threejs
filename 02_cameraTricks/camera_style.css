@@ -37,6 +37,7 @@ a:hover {
 	padding: 1px 30px 1px 30px;
 }
 #controls ul {
+	padding: 0px;
 	list-style: none;
 }
 #controls li {

@@ -24,6 +24,7 @@ plane.rotation.x = 0.785;
 plane.rotation.y = 0.185;
 scene.add(plane);
 
+
 // TEXT CONTAINERS
 var l_fov = document.querySelector("#label_fov");
 var l_px = document.querySelector("#label_px");
@@ -33,6 +34,33 @@ var l_rx = document.querySelector("#label_rx");
 var l_ry = document.querySelector("#label_ry");
 var l_rz = document.querySelector("#label_rz");
 
+// function to truncate decimals
+function decimalDigits(num, digits){
+	return (Math.floor(num * Math.pow(10, digits)))/Math.pow(10, digits);
+}
+
+
+// SLIDER VARIABLES
+// var fov_slider = document.createElement("INPUT");
+// fov_slider.setAttribute("type", "range");
+// document.querySelector("#controls").appendChild(fov_slider);
+var fov_slider = document.querySelector("#fov_sl");
+fov_slider.addEventListener("change", function() {
+	camera.fov = +fov_slider.value;
+});
+
+// RESIZE EVENT!
+window.addEventListener( 'resize', onWindowResize, false );
+function onWindowResize(){
+	wid = document.body.clientWidth;
+	hei = 400;
+	camera.aspect = wid/hei;
+  camera.updateProjectionMatrix();
+  renderer.setSize(wid, hei);
+}
+
+
+// ANIMATION
 function animate() {
 	requestAnimationFrame(animate);
 
@@ -48,18 +76,3 @@ function animate() {
 	renderer.render(scene, camera);
 }
 animate();
-
-// function to truncate decimals
-function decimalDigits(num, digits){
-	return (Math.floor(num * Math.pow(10, digits)))/Math.pow(10, digits);
-}
-
-// RESIZE EVENT!
-window.addEventListener( 'resize', onWindowResize, false );
-function onWindowResize(){
-	wid = document.body.clientWidth;
-	hei = 400;
-	camera.aspect = wid/hei;
-  camera.updateProjectionMatrix();
-  renderer.setSize(wid, hei);
-}
