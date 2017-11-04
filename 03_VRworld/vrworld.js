@@ -53,7 +53,18 @@ var dome = new THREE.Mesh(domeGeo, domeMat);
 dome.material.side = THREE.BackSide;
 scene.add(dome);
 
+let surfGeo = new THREE.Geometry();
+for (var i = 0; i < 3; i++) {
+	let posX =  Math.floor(Math.random(100));
+	let posZ = -Math.floor(Math.random(100));
 
+	surfGeo.vertices.push( new THREE.Vector3(posX, 0, posZ) );
+}
+surfGeo.faces.push( new THREE.Face3(0, 1, 2) );
+let surfMat = new THREE.MeshBasicMaterial(0xffffff);
+var surf = new THREE.Mesh(surfGeo, surfMat);
+surf.material.side = THREE.DoubleSide;
+scene.add(surf);
 
 
 

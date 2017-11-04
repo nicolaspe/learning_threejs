@@ -9,6 +9,7 @@ var camera = new THREE.PerspectiveCamera(40, wid/hei, 0.1, 10000);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(wid, hei);
 camera.position.z = 400;
+camera.rotation.x = -.2;
 container.appendChild(renderer.domElement);
 
 // CONTROLS
@@ -52,6 +53,45 @@ var plane = new THREE.Mesh(plane_geo, plane_mat);
 plane.rotation.x = 3.1416/2;
 plane.position.y = -100;
 scene.add(plane);
+
+
+// SURFACE
+var surfGeo = new THREE.Geometry();
+var rowLen = 8
+// create vertices
+for (let i = 0; i < 4; i++) {
+	for (let j = 0; j < rowLen; j++) {
+		let posY = 100*i -200;
+		let posZ = (j/rowLen)*200 - 100;
+
+		surfGeo.vertices.push( new THREE.Vector3(250, posY, posZ) );
+	}
+}
+// create faces
+let numCols = surfGeo.vertices.length/rowLen;
+for (let i = 0; i < numCols-1; i++) {
+	for (let j = 0; j < rowLen-1; j++) {
+		let pointA = (i*rowLen) + j;
+		let pointB = (i*rowLen) + j+1;
+		let pointC = (i*rowLen) + j+rowLen;
+		let pointD = (i*rowLen) + j+rowLen+1;
+
+		let newFaceA = new THREE.Face3( pointA, pointB, pointC );
+		let newFaceB = new THREE.Face3( pointC, pointD, pointB );
+
+		surfGeo.faces.push( newFaceA );
+		surfGeo.faces.push( newFaceB );
+	}
+}
+
+var surfMat = new THREE.MeshBasicMaterial({
+	color: 0xffffff,
+	wireframe: true
+});
+var surf = new THREE.Mesh(surfGeo, surfMat);
+surf.material.side = THREE.DoubleSide;
+scene.add(surf);
+
 
 
 // TEXT CONTAINERS
