@@ -1,0 +1,25 @@
+html {
+	background: black;
+}
+
+body {
+	color: #e0d5dd;
+	font-family: "Helvetica", "Tahoma", "Arial", "sans";
+	font-weight: lighter;
+	margin: 5px;
+}
+
+h1 {
+	text-align: center;
+}
+h1, h2, h3 {
+	color: #ffbf80;
+}
+
+a {
+	color: #be9fc1;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: bold;
+}
