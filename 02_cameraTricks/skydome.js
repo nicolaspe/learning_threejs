@@ -27,15 +27,30 @@ function onWindowResize(){
 
 
 // LIGHT
-var light = new THREE.PointLight( 0xffffff, 1, 6000, 2 );
-light.position.set(1000, 0, 0);
-scene.add(light);
+let plX = -50;
+let plY =  100;
+let plZ =  0;
+var p_light = new THREE.PointLight( 0xf0aaff, 0.5, 2000, 2 );
+p_light.position.set(plX, plY, plZ);
+scene.add(p_light);
+
+let ps_geo = new THREE.SphereGeometry(8, 8, 8);
+let ps_mat = new THREE.MeshBasicMaterial( {color: 0xf0aaff} );
+var p_sphere = new THREE.Mesh(ps_geo, ps_mat);
+p_sphere.position.set(plX, plY, plZ);
+scene.add(p_sphere);
+
+var d_light = new THREE.DirectionalLight( 0x10d510, 0.5 );
+// scene.add(d_light);
+
+var a_light = new THREE.AmbientLight( 0x000 ); // soft white light
+// scene.add( a_light );
 
 
 // SKYDOME
 // http://www.bzfusion.net/skymaps/sky_photo6.jpg
 // https://www.eso.org/public/usa/images/eso0932a/
-var skyGeo = new THREE.SphereGeometry(2000, 25, 25);
+var skyGeo = new THREE.SphereGeometry(500, 25, 25);
 var loader = new THREE.TextureLoader();
 var texture = loader.load("eso0932a_sphere.jpg");
 var skyMat = new THREE.MeshPhongMaterial({
@@ -43,7 +58,7 @@ var skyMat = new THREE.MeshPhongMaterial({
 });
 var skyDome = new THREE.Mesh(skyGeo, skyMat);
 skyDome.material.side = THREE.BackSide;
-scene.add(skyDome);
+// scene.add(skyDome);
 
 
 // PLANE
@@ -61,10 +76,11 @@ var rowLen = 8
 // create vertices
 for (let i = 0; i < 4; i++) {
 	for (let j = 0; j < rowLen; j++) {
+		let posX = 250 + Math.random()*60 -30;
 		let posY = 100*i -200;
 		let posZ = (j/rowLen)*200 - 100;
 
-		surfGeo.vertices.push( new THREE.Vector3(250, posY, posZ) );
+		surfGeo.vertices.push( new THREE.Vector3(posX, posY, posZ) );
 	}
 }
 // create faces
@@ -84,9 +100,10 @@ for (let i = 0; i < numCols-1; i++) {
 	}
 }
 
-var surfMat = new THREE.MeshBasicMaterial({
+var surfMat = new THREE.MeshPhongMaterial({
 	color: 0xffffff,
-	wireframe: true
+	emissive: 0x300011,
+	// wireframe: true
 });
 var surf = new THREE.Mesh(surfGeo, surfMat);
 surf.material.side = THREE.DoubleSide;
@@ -131,6 +148,12 @@ function animate() {
 	l_rx.textContent = decimalDigits(camera.rotation.x,2);
 	l_ry.textContent = decimalDigits(camera.rotation.y,2);
 	l_rz.textContent = decimalDigits(camera.rotation.z,2);
+
+	// surface rotation
+	// surf.rotation.x += 0.005;
+	// surf.rotation.y += 0.005;
+	// surf.rotation.z += 0.005;
+	surf.material.needsUpdate = true;
 
 	renderer.render(scene, camera);
 }
