@@ -9,12 +9,6 @@ var scene  = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(40, wid/hei, 0.1, 4000);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(wid, hei);
-// camera.position.x = -622.31;
-// camera.position.y =  107.65;
-// camera.position.z =  -22.73;
-// camera.rotation.x = -0.959;
-// camera.rotation.y = -1.385;
-// camera.rotation.z = -0.950;
 container.appendChild(renderer.domElement);
 
 // VR + CONTROLS
